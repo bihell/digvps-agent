@@ -91,10 +91,11 @@ install_agent() {
     echo "解压客户端"
     sudo mkdir -p $DigVPS_BASE_PATH
     sudo unzip -qo agent.zip &&
-        sudo mv agent $DigVPS_AGENT_PATH &&
-        sudo rm -rf agent.zip
+    sudo mv agent $DigVPS_AGENT_PATH &&
+    sudo rm -rf agent.zip
+}
 
-    echo "启动"
+restart() {
     # 检查程序是否运行并停止
     PID=$(pgrep -f "$DigVPS_AGENT_PATH")
     if [ -n "$PID" ]; then
@@ -120,4 +121,15 @@ install_agent() {
     fi
 }
 
-install_agent 0
+if [ $# -gt 0 ]; then
+    case $1 in
+        "install")
+            install 0
+            ;;
+        "restart")
+            restart 0
+            ;;
+    esac
+else
+    install 0
+fi
