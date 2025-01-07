@@ -124,12 +124,12 @@ restart() {
 if [ $# -gt 0 ]; then
     case $1 in
         "install")
-            install 0
+            install_agent 0
             ;;
         "restart")
             restart 0
             ;;
     esac
 else
-    install 0
+    install_agent 0
 fi
